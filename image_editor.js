@@ -392,9 +392,22 @@ cropper_list[2].style.left = canvas_right +outline/2 + 'px';
 
 }
 edit_image.addEventListener('click',function(){
+	active_stylesheet("stylesheet_two");
     
 })
 
+function active_stylesheet(remain_stylesheet_id){
+	document.querySelectorAll("link[rel=stylesheet]:not(#stylesheet_general").forEach(link =>{
+		console.log(link.id, remain_stylesheet_id,link.id == remain_stylesheet_id )
+	if(link.id != remain_stylesheet_id)  link.setAttribute("disabled", true);
+	else link.removeAttribute('disabled');
+
+	} );
+
+
+}
+
+edit_image.click();
 
 
 
