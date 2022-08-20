@@ -1,4 +1,5 @@
 const drop_section = document.querySelector('#drop_section');
+const image_editor = document.querySelector('#edit_image')
 function calculateAspectRatioFit(srcWidth, srcHeight) {
 
     const ratio = window.innerWidth * 0.45 / srcWidth;
@@ -50,7 +51,7 @@ document.addEventListener('mousemove',zoom_tool);
 document.querySelector('.expand_button').addEventListener('click',function(){
 drop_section.parentNode.style.display = 'flex';
 
-document.documentElement.style.setProperty('--opacity',"outline/2");
+document.documentElement.style.setProperty('--opacity',"0.5");
 setTimeout(()=>document.addEventListener('click',close_section));
 document.removeEventListener('mousemove',zoom_tool);
 })
@@ -346,15 +347,9 @@ function update_position(){
    canvas_top += window.scrollY;
    canvas_bottom +=window.scrollY;
    canvas_right += window.scrollX;
-
-   let outline =window.getComputedStyle(canvas).getPropertyValue('outline');
-   console.log(typeof outline)
-   outline = parseFloat(outline.substring(outline.length- 3));
+const outline = parseFloat(getComputedStyle(canvas).getPropertyValue('--outline_size'));
 
 
-
-console.log(window.getComputedStyle(canvas).getPropertyValue('outline'))
-console.log(canvas_top-outline/2, canvas_top)
    
 cropper_list[0].style.top = canvas_top  - outline/2 + 'px';
 cropper_list[0].style.left =  canvas_left - outline/2 +'px';
@@ -394,6 +389,22 @@ cropper_list[2].style.left = canvas_right +outline/2 + 'px';
          
     cropper_side[3].style.left = canvas_left + 'px';
     cropper_side[3].style.top = canvas_bottom  + 'px';
-   
 
 }
+edit_image.addEventListener('click',function(){
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
