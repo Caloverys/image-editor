@@ -6,7 +6,7 @@ function calculateAspectRatioFit(srcWidth, srcHeight) {
     if(srcHeight > window.innerHeight * 0.8){
     //document.querySelector('#canvas_wrapper').parentNode => .vertical_center
 
-    //prevent vertical center that overflow if image size is bigger than window.height;
+   // prevent vertical center that overflow if image size is bigger than window.height;
     const canvas_wrapper = document.querySelector('#canvas_wrapper');
     canvas_wrapper.parentNode.style.display= 'block';
     canvas_wrapper.style.position = 'absolute';
@@ -163,12 +163,12 @@ context.drawImage(img,0,0,calculateAspectRatioFit(img.width,img.height).width,ca
 
 }
 
-img.src = "https://media.istockphoto.com/photos/villefranchesurmer-village-in-france-picture-id1248448159?k=20&m=1248448159&s=612x612&w=0&h=leahrG95LcBDfdkPCavNL9W8ZC2OroNZPqO-196HDPU=";
+img.src = "https:media.istockphoto.com/photos/villefranchesurmer-village-in-france-picture-id1248448159?k=20&m=1248448159&s=612x612&w=0&h=leahrG95LcBDfdkPCavNL9W8ZC2OroNZPqO-196HDPU=";
 
-//img.crossOrigin = "none";
+img.crossOrigin = "none";
 
 var newWin
-//var newWin = window.open();;            
+var newWin = window.open();;            
 //check if user block pop-up window
 if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
 {
@@ -313,7 +313,7 @@ else return `rgba(${color.substring(color.indexOf("(")+1,color.indexOf(")")-1)},
 
 
 window.onload = function(){
-//document.elementFromPoint(400, 500).click();
+document.elementFromPoint(400, 500).click();
 }
 
 
@@ -412,8 +412,19 @@ edit_image.click();
 
 
 
+const all_text_button = document.querySelectorAll('.text');
+const all_button = document.querySelectorAll('.button');
+all_text_button.forEach((text,index) =>{
+	text.addEventListener('click', ()=>all_button[index].click());
+	text.addEventListener('mouseenter',()=> all_button[index].children[0].classList.add("button_hover"));
+    text.addEventListener('mouseleave',()=> all_button[index].children[0].classList.remove("button_hover"));
+});
+all_button.forEach((button,index)=>{
 
+    button.children[0].addEventListener('mouseenter',()=> all_text_button[index].classList.add("text_hover"));
+   button.addEventListener('mouseleave',()=> all_text_button[index].children[0].classList.remove("text_hover"));
 
+})
 
 
 
