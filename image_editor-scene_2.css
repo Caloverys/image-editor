@@ -2,28 +2,33 @@
      display: revert !important;
    }
    nav{
-    background-color: yellow;
-    width: 10vw;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   border-radius: 5px;
+    width: 5vw;
     position: relative;
     transition: width .1s ease-out, display 0.1s ease-out;
+    position: fixed;
+    top: 10vh;
+    left: 0;
 
    }
    .icon_section{
-    width: 10vw !important;
+    width: 5vw !important;
     display: none;
    }
     .button{
     width: 100%;
    }
    .button > svg{
-    width:7.5vw;
+    width:5vw;
     height: 10vh;
     padding: 1vw;
+    opacity: 0.55;
    }
 
 
 nav:hover{
-width: 20vw;
+width: 11vw;
 
 }
 nav:hover  #explanation{
@@ -32,19 +37,32 @@ nav:hover  #explanation{
 #explanation{
   position: absolute;
   top: 0%;
-  left: 50%;
+  left: 40%;
   display: none;
 }
 .text{
  
   height: 10vh !important;
-  width: 7.5vw !important;
+  width: 5vw !important;
   padding: 1vw;
   font-family: sans-serif;
   color: black;
   font-size: 1.2em;
   white-space:  nowrap;
  
+}
+.button:hover > svg,.button_hover{
+  opacity:1 !important;
+}
+.text > div{
+  color: rgba(108, 122, 137)
+}
+.text:hover > div, .text_hover{
+  color: black !important;
+}
+#canvas_wrapper{
+  position: absolute !important;
+  left: 50vw;
 }
 
 
