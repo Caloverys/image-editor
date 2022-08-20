@@ -3,4 +3,49 @@
    }
    nav{
     background-color: yellow;
+    width: 10vw;
+    position: relative;
+    transition: width .1s ease-out, display 0.1s ease-out;
+
    }
+   .icon_section{
+    width: 10vw !important;
+    display: none;
+   }
+    .button{
+    width: 100%;
+   }
+   .button > svg{
+    width:7.5vw;
+    height: 10vh;
+    padding: 1vw;
+   }
+
+
+nav:hover{
+width: 20vw;
+
+}
+nav:hover  #explanation{
+  display: block !important;
+}
+#explanation{
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  display: none;
+}
+.text{
+ 
+  height: 10vh !important;
+  width: 7.5vw !important;
+  padding: 1vw;
+  font-family: sans-serif;
+  color: black;
+  font-size: 1.2em;
+  white-space:  nowrap;
+ 
+}
+
+
+
