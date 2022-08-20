@@ -162,6 +162,15 @@ display: inline-block;
     width: 100vw;
         z-index: -1;
     }
+        .hor_center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    }
+    .column-flex{
+         flex-direction: column;
+    }
 
         #canvas_wrapper{
     box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
