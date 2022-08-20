@@ -1,10 +1,4 @@
-*{
-user-select: text;
-}
- html{
-    --opacity: 1;
-    --outline_size:1px;
-    }
+
 td{
 width: 10px;
 height: 10px;
@@ -326,9 +320,7 @@ width: 25px;
 background-color:#79ffe1;
 color:#000;
    }
-   .blue_outline{
-    /*outline: var(--outline_size ) solid rgb(26, 115, 232);;*/
-   }
+
 
 
    }
@@ -428,40 +420,26 @@ color:#000;
     position: absolute;
     transform: translate(-50%, -50%);  
     border: 1px solid white;  
+    z-index: 99;
    }
    .cropper_side{
     background-color: #39f;
-    z-index: 9999;
- 
+    z-index: 2;
+
     position: absolute;
-    transform-origin: bottom left;
+
 
 
    
 
    }
    div[class^='cropper_hor'],div[class*='cropper_hor']{
-     height: var(--outline_size);
+     height: calc(var(--outline_size)*2);
    }
    div[class^='cropper_ver'], div[class*='cropper_ver']{
-    width: var(--outline_size);
+    width: calc(var(--outline_size)*2);
    }
-   .second_notice{
-        visibility:visible !important;
-     transform: translate3d(0, calc(100% - 125px - 20px), -1px) scale(0.95);
-   }
-   .third_notice{
-     visibility:visible !important;
-        transform: translate3d(0, calc(100% - 125px - 40px), -2px) scale(0.9);
 
-   }
-   .further_notice{
-    visibility:visible !important;
-    transform: translate3d(0, calc(100% - 125px - 60px), -3px) scale(0.85);
-   }
-   .center_align{
-    text-align: center;
-   }
    
    canvas{
     margin: 0;
