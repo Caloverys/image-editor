@@ -1,0 +1,23 @@
+   .second_notice{
+        visibility:visible !important;
+     transform: translate3d(0, calc(100% - 125px - 20px), -1px) scale(0.95);
+   }
+   .third_notice{
+     visibility:visible !important;
+        transform: translate3d(0, calc(100% - 125px - 40px), -2px) scale(0.9);
+
+   }
+   .further_notice{
+    visibility:visible !important;
+    transform: translate3d(0, calc(100% - 125px - 60px), -3px) scale(0.85);
+   }
+   .center_align{
+    text-align: center;
+   }
+   *{
+user-select: text;
+}
+ html{
+    --opacity: 1;
+    --outline_size:1px;
+    }
