@@ -1,5 +1,6 @@
 const drop_section = document.querySelector('#drop_section');
-const image_editor = document.querySelector('#edit_image')
+const image_editor = document.querySelector('#edit_image');
+let image_data;
 function calculateAspectRatioFit(srcWidth, srcHeight) {
 
     const ratio = window.innerWidth * 0.45 / srcWidth;
@@ -140,7 +141,7 @@ tr.appendChild(td)
 
 
 let current_image;
-const input = document.querySelector('input');
+const input = document.querySelector('input[type=file]');
 function load_image(url){
 return new Promise(resolve=>{
 const img = new Image();
@@ -159,13 +160,14 @@ img.onload = function(){
 context.canvas.width  = calculateAspectRatioFit(img.width,img.height).width;
 context.canvas.height = calculateAspectRatioFit(img.width,img.height).height;
 context.drawImage(img,0,0,calculateAspectRatioFit(img.width,img.height).width,calculateAspectRatioFit(img.width,img.height).height);
+const data = canvas.toDataURL("image/jpg");
 
+image_data = data;
 
 }
 
 img.src = "https:media.istockphoto.com/photos/villefranchesurmer-village-in-france-picture-id1248448159?k=20&m=1248448159&s=612x612&w=0&h=leahrG95LcBDfdkPCavNL9W8ZC2OroNZPqO-196HDPU=";
 
-img.crossOrigin = "none";
 
 var newWin
 var newWin = window.open();;            
@@ -186,9 +188,13 @@ e.preventDefault();
        context.canvas.width  = calculateAspectRatioFit(image.width,image.height).width;
 context.canvas.height = calculateAspectRatioFit(image.width,image.height).height;
 current_image = image;
+
 context.drawImage(image,0,0,calculateAspectRatioFit(image.width,image.height).width,calculateAspectRatioFit(image.width,image.height).height);
        drop_section.parentNode.style.display = 'none';
        document.documentElement.style.setProperty('--opacity',"1");
+       const data = canvas.toDataURL("image/jpg");
+
+image_data = data;
 
     }
     reader.readAsDataURL(file);
@@ -200,20 +206,18 @@ document.documentElement.style.setProperty('--opacity',"1");
 drop_section.parentNode.style.display = 'none';
 const file = input.files[0];
 const read_size = input.files[0].size;
-console.log(read_size)
 const file_reader = new FileReader();
 file_reader.onload = async function(e){
 const image = await load_image(e.target.result);
-console.log(image);
-context.filter = "saturate(8)";    
-context.drawImage(image,0,0);
-const data = canvas.toDataURL("image/jpg");
 context.filter = "none";  
+
 context.canvas.width  = calculateAspectRatioFit(image.width,image.height).width;
 context.canvas.height = calculateAspectRatioFit(image.width,image.height).height;
 current_image = image;
 context.drawImage(image,0,0,calculateAspectRatioFit(image.width,image.height).width,calculateAspectRatioFit(image.width,image.height).height);
+const data = canvas.toDataURL("image/jpg");
 
+image_data = data;
 
                 const imae = document.createElement('img');
 
@@ -257,12 +261,13 @@ document.addEventListener('mousemove',zoom_tool);
 
            }
 function zoom_tool(e){
+
 if(!isInCanvas(e.clientX,e.clientY)){
 document.body.style.cursor = "initial";
                 wrapper.style.display = 'none';
                 return;
 }else wrapper.style.display = 'block';
-document.body.style.cursor='crosshair';
+//document.body.style.cursor='crosshair';
 let color = window.getComputedStyle(document.querySelector('td[data-x="5"][data-y="5"]'))['background-color'];
    document.querySelector('#small_box .box').style.backgroundColor = color;
 const posX = e.clientX - canvas.getBoundingClientRect().left;
@@ -351,27 +356,27 @@ const outline = parseFloat(getComputedStyle(canvas).getPropertyValue('--outline_
 
 
    
-cropper_list[0].style.top = canvas_top  - outline/2 + 'px';
-cropper_list[0].style.left =  canvas_left - outline/2 +'px';
+cropper_list[0].style.top = canvas_top  + outline/2 + 'px';
+cropper_list[0].style.left =  canvas_left + outline/2 +'px';
 cropper_list[1].style.left = canvas_left + canvas_width/2 +"px"
-cropper_list[1].style.top = canvas_top  - outline/2  +'px';
+cropper_list[1].style.top = canvas_top  + outline/2  +'px';
 cropper_list[2].style.left = canvas_right +outline/2 + 'px';
-   cropper_list[2].style.top = canvas_top - outline/2  +'px';
+   cropper_list[2].style.top = canvas_top + outline/2  +'px';
    cropper_list[3].style.left = canvas_right +outline/2 +'px';
    cropper_list[3].style.top = canvas_top + canvas_height/2 + 'px';
    cropper_list[4].style.left = canvas_right +outline/2 +'px';
    cropper_list[4].style.top = canvas_bottom + outline/2 + 'px';
    cropper_list[5].style.left = canvas_left +canvas_width/2 + "px";
    cropper_list[5].style.top = canvas_bottom +outline/2 + "px";
-   cropper_list[6].style.left = canvas_left + 'px';
+   cropper_list[6].style.left = canvas_left +outline/2+ 'px';
     cropper_list[6].style.top = canvas_bottom + outline/2 + "px";
-    cropper_list[7].style.left = canvas_left  -outline/2 + 'px';
+    cropper_list[7].style.left = canvas_left  +outline/2 + 'px';
     cropper_list[7].style.top = canvas_top + canvas_height/2  + 'px';
    
 
 
 
-    cropper_side[0].style.left = canvas_left -0.5 + 'px';
+    cropper_side[0].style.left = canvas_left  + 'px';
     cropper_side[0].style.height  = canvas_height + 'px';
     cropper_side[0].style.top = canvas_top  + 'px';
 
@@ -436,21 +441,105 @@ all_button.forEach((button,index)=>{
     prev_index = index;
 
     all_text_button[index].children[0].style.setProperty('color', "black");
-   })
+   });
+   //if(button.id=)
 });
 
+let timeout;
 document.querySelector('nav').addEventListener('mouseenter',e=>{
-setTimeout(()=>{
+timeout = setTimeout(()=>{
     e.target.style.width = '11vw';
     e.target.querySelector('#explanation').style.display = 'block';
-},600);
+},500);
 })
 document.querySelector('nav').addEventListener('mouseleave',e=>{
     e.target.style.width = '5vw';
     e.target.querySelector('#explanation').style.display = 'none';
+    if(timeout) window.clearTimeout(timeout)
+});
+/*
+console.log(document.querySelector('#crop_button'),document.querySelector('#crop_button').children[0] )
+document.querySelector('#crop_button').children[0].addEventListener('click',function(){
+    console.log('yes')
+    document.querySelectorAll('.cropper_point').forEach(i=>i.style.display = 'block');
+    document.querySelectorAll('.cropper_side').forEach(i=>i.style.display = 'block');
+    })
+document.querySelectorAll(".cropper_point").forEach(i=>{
+    
+    console.log('what')
+    i.addEventListener('click',e=>{
+       
+        canvas.style.width = e.clientX + 'px';
+        canvas.style.height = e.clientY +'px'
+
+
+    })
+   
+
 })
+*/
+const all_input_range = document.querySelectorAll('input[type=range]');
+function update_input(){
+all_input_range.forEach(input =>{
+  //  console.log(input.parentNode.querySelector('div').textContent)
+           const text = input.parentNode.querySelector('div').textContent;
+         const units = (text !== "Blur" ? (text!=="Hue-rotate" ? "%" :"deg") : "px");
+    input.parentNode.querySelector('.range_value').textContent = input.value + units;
+});
+};
 
+update_input();
 
+all_input_range.forEach(input =>{
+input.oninput = function(){
+         const text = input.parentNode.querySelector('div').textContent;
+         const units = (text !== "Blur" ? (text!=="Hue-rotate" ? "%" :"deg") : "px");
+    input.parentNode.querySelector('.range_value').textContent = input.value + units;
+      context.filter = "brightness(100%)";
+    all_input_range.forEach(i=>{
+       
+        const text = i.parentNode.querySelector('div').textContent;
+         const units = (text !== "Blur" ? (text!=="Hue-rotate" ? "%" :"deg") : "px");
+
+         context.filter+= `${text.toLowerCase()}(${i.value + units}) `;
+
+     
+    });
+  console.log(context.filter)
+
+    const image = new Image();
+    image.onload = function(){
+         context.drawImage(image,0,0,calculateAspectRatioFit(img.width,img.height).width,calculateAspectRatioFit(img.width,img.height).height);
+    }
+    image.src = image_data;
+   
+
+}
+});
+
+document.querySelector('.reset_button').addEventListener('click',function(){
+    all_input_range.forEach(input =>{
+        const text = input.parentNode.querySelector('div').textContent;
+        if(text === "Brightness" || text === "Saturate" || text === "Contrast" ) input.value = 100;
+        else input.value = 0;
+    });
+    context.filter ="none";
+    const image = new Image();
+    image.onload = function(){
+         context.drawImage(image,0,0,calculateAspectRatioFit(img.width,img.height).width,calculateAspectRatioFit(img.width,img.height).height);
+    }
+    canvas.style.opacity = 1;
+    image.src = image_data;
+    update_input();
+})
+all_input_range
+/*
+document.querySelector('input[type=range]').oninput = function() {
+    console.log("dhjdd")
+  var value = (this.value-this.min)/(this.max-this.min)*100
+  this.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
+};
+*/
 
 
 
