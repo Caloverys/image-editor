@@ -140,6 +140,8 @@ cursor: e-resize;
 
 #filter_section{
   width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 input[type=range] {
@@ -176,8 +178,9 @@ input[type=range] {
   color: #202124;
   background: white;
   width: max-content;
-  position:relative;
-  left: 80%;
+  position:absolute;
+  right: 5%;
+  bottom: 5%;
 
 }
 .reset_button:hover{
