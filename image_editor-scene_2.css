@@ -3,7 +3,7 @@
    }
    nav{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-   border-radius: 5px;
+   border-radius: 7.5px;
     width: 5vw;
     position: relative;
     transition: width .1s ease-out, display 0.1s ease-out;
@@ -23,17 +23,9 @@
     width:5vw;
     height: 10vh;
     padding: 1vw;
-    opacity: 0.55;
+    opacity: 0.45;
    }
 
-
-nav:hover{
-width: 11vw;
-
-}
-nav:hover  #explanation{
-  display: block !important;
-}
 #explanation{
   position: absolute;
   top: 0%;
@@ -46,7 +38,6 @@ nav:hover  #explanation{
   width: 5vw !important;
   padding: 1vw;
   font-family: sans-serif;
-  color: black;
   font-size: 1.2em;
   white-space:  nowrap;
  
@@ -55,7 +46,7 @@ nav:hover  #explanation{
   opacity:1 !important;
 }
 .text > div{
-  color: rgba(108, 122, 137)
+  color: rgba(108, 122, 137);
 }
 .text:hover > div, .text_hover{
   color: black !important;
@@ -64,6 +55,35 @@ nav:hover  #explanation{
   position: absolute !important;
   left: 50vw;
 }
+   .cropper_point{
+    background-color: rgb(26, 115, 232);
+    height: 6px;
+    width: 6px;
+    opacity: 0.95;
+    position: absolute;
+    transform: translate(-50%, -50%);  
+    border: 1px solid white;  
+    z-index: 99;
+    display: none;
+   }
+   .cropper_side{
+    background-color: #39f;
+    z-index: 2;
+
+    position: absolute;
+    display: none;
+
+
+
+   
+
+   }
+   div[class^='cropper_hor'],div[class*='cropper_hor']{
+     height: calc(var(--outline_size)*2);
+   }
+   div[class^='cropper_ver'], div[class*='cropper_ver']{
+    width: calc(var(--outline_size)*2);
+   }
 
 
 
