@@ -7,7 +7,7 @@ color:#000;
 
 
    }
-   button,input{
+   button,input[type='file']{
     cursor: pointer;
    }   
 
@@ -33,7 +33,7 @@ color:#000;
     }
  html{
     --opacity: 1;
-    --outline_size:1px;
+    --outline_size:5px;
     }
 
     input[type='file']{
@@ -46,6 +46,9 @@ top: 0;
 z-index: 999;
 cursor: pointer;
 
+}
+.cropper_point, .cropper_side{
+    display: none;
 }
     .center_screen{
     width: 100vw;
@@ -161,6 +164,9 @@ display: inline-block;
     justify-content: center;
     width: 100vw;
         z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
     }
         .hor_center{
     width: 100%;
@@ -181,6 +187,15 @@ display: inline-block;
     }
     div[class^='scene_'], div[class*='scene_']{
     display: none;
+}
+
+
+body{
+    overflow: hidden;
+}
+
+#option_section{
+    z-index: 999;
 }
 
 
