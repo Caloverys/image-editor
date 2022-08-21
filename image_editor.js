@@ -416,13 +416,43 @@ const all_text_button = document.querySelectorAll('.text');
 const all_button = document.querySelectorAll('.button');
 all_text_button.forEach((text,index) =>{
 	text.addEventListener('click', ()=>all_button[index].click());
-	text.addEventListener('mouseenter',()=> all_button[index].children[0].classList.add("button_hover"));
-    text.addEventListener('mouseleave',()=> all_button[index].children[0].classList.remove("button_hover"));
+	text.addEventListener('mouseenter',()=>{
+        setTimeout(()=>{
+            all_text_button[index].children[0].classList.add("text_hover");
+        all_button[index].children[0].classList.add("button_hover");
+        },750)
+    });
+    text.addEventListener('mouseleave',()=>{
+        all_button[index].children[0].classList.remove("button_hover");
+         all_text_button[index].children[0].classList.remove("text_hover");
+    });
+
 });
+let prev_index = null;
 all_button.forEach((button,index)=>{
 
-    button.children[0].addEventListener('mouseenter',()=> all_text_button[index].classList.add("text_hover"));
-   button.addEventListener('mouseleave',()=> all_text_button[index].children[0].classList.remove("text_hover"));
+    button.addEventListener('mouseenter',()=>{
+        setTimeout(()=>{
+            all_text_button[index].children[0].classList.add("text_hover");
+        all_button[index].children[0].classList.add("button_hover");
+        },750)
+        
+    });
+   button.addEventListener('mouseleave',()=>{
+    all_text_button[index].children[0].classList.remove("text_hover");
+     all_button[index].children[0].classList.remove("button_hover");
+});
+   button.addEventListener('click',function(){
+    if(prev_index !== null){
+        all_button[prev_index].children[0].style.opacity = 0.45;
+        all_text_button[prev_index].children[0].style.color = 'rgba(108, 122, 137)';
+    }
+
+    button.children[0].style.setProperty('opacity',"1","important");
+    prev_index = index;
+
+    all_text_button[index].children[0].style.setProperty('color', "black");
+   })
 
 })
 
