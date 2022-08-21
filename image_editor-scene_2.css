@@ -10,6 +10,8 @@
     position: fixed;
     top: 10vh;
     left: 0;
+    background-color: white;
+    z-index: 9999;
 
    }
    .icon_section{
@@ -57,12 +59,12 @@
 }
    .cropper_point{
     background-color: rgb(26, 115, 232);
-    height: 6px;
-    width: 6px;
+    height: 10px;
+    width: 10px;
     opacity: 0.95;
     position: absolute;
     transform: translate(-50%, -50%);  
-    border: 1px solid white;  
+    border: 1.5px solid white;  
     z-index: 99;
     display: none;
    }
@@ -75,15 +77,109 @@
 
 
 
-   
-
    }
+
    div[class^='cropper_hor'],div[class*='cropper_hor']{
-     height: calc(var(--outline_size)*2);
+     height: var(--outline_size);
    }
    div[class^='cropper_ver'], div[class*='cropper_ver']{
-    width: calc(var(--outline_size)*2);
+    width: var(--outline_size);
    }
 
+  .cropper_ver_1{
+    cursor: w-resize;
+   }
+   .cropper_hor_2{
+    cursor: n-resize;
+    
+   }
+   .cropper_ver_3{
+cursor: e-resize;
+   }
+   .cropper_hor_4{
+    cursor: s-resize;
+   }
+   .cropper_point_1{
+    cursor: nw-resize;
+   }
+      .cropper_point_2{
+    cursor: n-resize;
+   }
 
+      .cropper_point_3{
+    cursor: ne-resize;
+   }
+      .cropper_point_4{
+    cursor: e-resize;
+   }
+      .cropper_point_5{
+    cursor: se-resize;
+   }
+         .cropper_point_6{
+    cursor: s-resize;
+   }
+            .cropper_point_7{
+    cursor: sw-resize;
+   }
+               .cropper_point_8{
+    cursor: w-resize;
+   }
+#setting_section{
+      box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 40vw;
+    height: 85vh;
+    position: absolute;
+    left: 7.5vw;
+    top: 10vh;
 
+    border-radius: 10px;
+   
+    padding: 1vh;
+}
+
+#filter_section{
+  width: 100%;
+}
+
+input[type=range] {
+  height: 3px;
+  width:80%;
+  position: relative;
+  left: 10%;
+  transition: background 450ms ease-in;
+
+}
+.section{
+  padding: 2.25% 5%;
+}
+.section > div{
+  margin-bottom: 0.25%;
+  
+}
+.section{
+  position: relative;
+}
+.range_value{
+    position: absolute;
+    top: 20%;
+    right: 10%;
+
+}
+.reset_button{
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 9px 24px 11px 24px;
+  border: 2px solid #dadce0;
+  color: #202124;
+  background: white;
+  width: max-content;
+  position:relative;
+  left: 80%;
+
+}
+.reset_button:hover{
+  border: 2px solid #feedbc;
+}
