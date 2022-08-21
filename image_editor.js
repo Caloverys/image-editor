@@ -398,21 +398,13 @@ cropper_list[2].style.left = canvas_right +outline/2 + 'px';
 }
 edit_image.addEventListener('click',function(){
 	active_stylesheet("stylesheet_two");
+    if(document.querySelector('.photo_canvas')) document.querySelector('.photo_canvas').remove();
+    preview.style.visibility = 'visible';
     
 })
 
-function active_stylesheet(remain_stylesheet_id){
-	document.querySelectorAll("link[rel=stylesheet]:not(#stylesheet_general").forEach(link =>{
-		console.log(link.id, remain_stylesheet_id,link.id == remain_stylesheet_id )
-	if(link.id != remain_stylesheet_id)  link.setAttribute("disabled", true);
-	else link.removeAttribute('disabled');
-
-	} );
 
 
-}
-
-edit_image.click();
 
 
 
@@ -457,13 +449,14 @@ document.querySelector('nav').addEventListener('mouseleave',e=>{
     e.target.querySelector('#explanation').style.display = 'none';
     if(timeout) window.clearTimeout(timeout)
 });
-/*
+
 console.log(document.querySelector('#crop_button'),document.querySelector('#crop_button').children[0] )
 document.querySelector('#crop_button').children[0].addEventListener('click',function(){
     console.log('yes')
     document.querySelectorAll('.cropper_point').forEach(i=>i.style.display = 'block');
     document.querySelectorAll('.cropper_side').forEach(i=>i.style.display = 'block');
     })
+/*
 document.querySelectorAll(".cropper_point").forEach(i=>{
     
     console.log('what')
@@ -509,7 +502,7 @@ input.oninput = function(){
 
     const image = new Image();
     image.onload = function(){
-         context.drawImage(image,0,0,calculateAspectRatioFit(img.width,img.height).width,calculateAspectRatioFit(img.width,img.height).height);
+         context.drawImage(image,0,0,calculateAspectRatioFit(image.width,image.height).width,calculateAspectRatioFit(image.width,image.height).height);
     }
     image.src = image_data;
    
@@ -526,7 +519,7 @@ document.querySelector('.reset_button').addEventListener('click',function(){
     context.filter ="none";
     const image = new Image();
     image.onload = function(){
-         context.drawImage(image,0,0,calculateAspectRatioFit(img.width,img.height).width,calculateAspectRatioFit(img.width,img.height).height);
+         context.drawImage(image,0,0,calculateAspectRatioFit(image.width,image.height).width,calculateAspectRatioFit(image.width,image.height).height);
     }
     canvas.style.opacity = 1;
     image.src = image_data;
@@ -540,7 +533,79 @@ document.querySelector('input[type=range]').oninput = function() {
   this.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
 };
 */
+let track;
+const video = document.querySelector('video');
+document.querySelector('#take_image').addEventListener('click',function(){
+    active_stylesheet("stylesheet_three");
+    navigator.mediaDevices.getUserMedia({ video:true, audio: false })
+      .then((stream) => {
+        video.srcObject = stream;
+        video.play();
+        stream = stream;
+        track = stream.getTracks();
+      })
+
+})
+function active_stylesheet(remain_stylesheet_id){
+    document.querySelectorAll("link[rel=stylesheet]:not(#stylesheet_general").forEach(link =>{
+        console.log(link.id, remain_stylesheet_id,link.id == remain_stylesheet_id )
+    if(link.id != remain_stylesheet_id)  link.setAttribute("disabled", true);
+    else link.removeAttribute('disabled');
+
+    } );
 
 
+}
+
+document.querySelector('#take_image').click();
+
+document.querySelector('#take_photo_button').addEventListener('click',function(){
+ const canvas = document.createElement('canvas');
+ const preview = document.querySelector('#preview');
+ canvas.className = 'photo_canvas';
+ document.body.appendChild(canvas);
+ const context = canvas.getContext('2d');
+ context.canvas.width = preview.offsetWidth ;
+ context.canvas.height = preview.offsetHeight ;
+
+ 
+ context.drawImage(video, 0, 0, preview.offsetWidth, preview.offsetHeight);
+ const data = canvas.toDataURL('image/png');
+ canvas.src = data;
+ canvas.style.position = 'absolute';
+
+ canvas.style.left = preview.getBoundingClientRect().left + window.scrollX+ "px";
+ canvas.style.top = preview.getBoundingClientRect().top + window.scrollY+ "px";
+const correct_button = document.querySelector('.correct_mark');
+const delete_button = document.querySelector('.delete_button');
+correct_button.style.display = 'revert';
+delete_button.style.display = 'revert';
+ preview.style.visibility = 'hidden';
+ delete_button.addEventListener('click', function(){
+    preview.style.visibility = 'visible';
+    canvas.remove();
+    correct_button.style.display = 'none';
+delete_button.style.display = 'none';
+
+ })
+ correct_button.addEventListener('click', function(){
+track.forEach(track => {
+    track.stop();
+});
+
+    image_data = canvas.toDataURL('image/png');
+    edit_image.click();
+
+   const general_canvas = canvas_wrapper.querySelector('canvas')
+    const image = new Image();
+    image.onload = function(){
+         general_canvas.getContext('2d').drawImage(image,0,0,calculateAspectRatioFit(image.width,image.height).width,calculateAspectRatioFit(image.width,image.height).height);
+    }
+    image.src = image_data;
+      correct_button.style.display = 'none';
+delete_button.style.display = 'none';
+ })
+
+})
 
 
