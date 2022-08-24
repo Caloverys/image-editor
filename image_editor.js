@@ -5,18 +5,21 @@ let image_data;
 function calculateAspectRatioFit(srcWidth, srcHeight) {
 
   const ratio = window.innerWidth * 0.45 / srcWidth;
-  if (srcHeight > window.innerHeight * 0.8) {
+  if (srcHeight * ratio > window.innerHeight * 0.8) {
 
     // prevent vertical center that overflow if image size is bigger than window.height;
     const canvas_wrapper = document.querySelector('#canvas_wrapper');
     canvas_wrapper.parentNode.style.display = 'block';
     canvas_wrapper.style.position = 'absolute';
-    canvas_wrapper.style.top = '20vh';
+    canvas_wrapper.style.top = '10vh';
+    document.body.style.overflow = 'scroll';
 
 
   } else {
     canvas_wrapper.parentNode.style.display = 'flex';
     canvas_wrapper.style.position = 'static';
+     document.body.style.overflow = 'auto';
+
 
 
   }
@@ -506,6 +509,8 @@ all_input_range.forEach(input => {
 
 
     });
+    context.save();
+    context.restore();
 
     const image = new Image();
     image.onload = function() {
@@ -524,6 +529,8 @@ document.querySelector('.reset_button').addEventListener('click', function() {
     else input.value = 0;
   });
   context.filter = "none";
+  context.save();
+  context.restore();
   const image = new Image();
   image.onload = function() {
     context.drawImage(image, 0, 0, calculateAspectRatioFit(image.width, image.height).width, calculateAspectRatioFit(image.width, image.height).height);
@@ -598,25 +605,27 @@ document.querySelector('#take_photo_button').addEventListener('click', function(
     });
 
     image_data = canvas.toDataURL('image/png');
-    edit_image.click();
+
 
     const general_canvas = canvas_wrapper.querySelector('canvas')
     const image = new Image();
     current_image = image;
     image.onload = function() {
         console.log(image.width,image.height)
-      general_canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height);
+     // general_canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height);
+
+  general_canvas.getContext('2d').canvas.width = calculateAspectRatioFit(image.width, image.height).width;
+  general_canvas.getContext('2d').canvas.height = calculateAspectRatioFit(image.width, image.height).height;
+  current_image = image;
+  general_canvas.getContext('2d').drawImage(image, 0, 0, calculateAspectRatioFit(image.width, image.height).width, calculateAspectRatioFit(image.width, image.height).height);
     }
     image.src = image_data;
     correct_button.style.display = 'none';
     delete_button.style.display = 'none';
+ console.log(image.width)
 
-
-  context.canvas.width = calculateAspectRatioFit(image.width, image.height).width;
-  context.canvas.height = calculateAspectRatioFit(image.width, image.height).height;
-  current_image = image;
-  context.drawImage(image, 0, 0, calculateAspectRatioFit(image.width, image.height).width, calculateAspectRatioFit(image.width, image.height).height);
-setTimeout(()=>window.dispatchEvent(new Event('resize')),10);
+//setTimeout(()=>window.dispatchEvent(new Event('resize')),0);
+    edit_image.click();
   })
 
 })
@@ -638,6 +647,7 @@ document.querySelector('#download_image_button').addEventListener('click', funct
   link.href = canvas.toDataURL(`image/${document.querySelector('.selected_format_button').textContent.toLowerCase()}`);
   link.click();
   link.remove();
+ // debugger
 });
 
 document.querySelectorAll('.format_button').forEach(button => {
@@ -682,3 +692,11 @@ document.querySelector('#crop_button').addEventListener('click', () => {
   update_position();
 });
 document.querySelector('#art_button').addEventListener('click', unfinished_message)
+
+
+
+
+
+
+
+
