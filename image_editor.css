@@ -171,6 +171,7 @@ hr {
   padding: 1vw;
   border-radius: 10px;
   opacity: var(--opacity);
+
 }
 div[class^='scene_'],
 div[class*='scene_'] {
@@ -204,6 +205,4 @@ div[class*='scene_'] {
 img{
     display: none;
 }
-#video_container{
-visibility:hidden;
-}
+
