@@ -5,6 +5,7 @@
 <link id='stylesheet_two' rel='stylesheet' href='image_editor-scene_2.css' disabled>
 <link id='stylesheet_three' rel='stylesheet' href='image_editor-scene_3.css' disabled>
 <link id='stylesheet_general' rel='stylesheet' href='image_editor.css'>
+<link id='stylesheet_general' rel='stylesheet' href='media_query.css'>
 </head>
 <body>
 
@@ -33,7 +34,7 @@
 
 </div>
 
-<div class='vertical_center'>
+<div class='vertical_center' >
   <div id='canvas_wrapper' class='box-shadow-transition '>
     <canvas ></canvas>
   </div>
@@ -61,13 +62,13 @@
 </div>
   <div class='hor_center'>
     <div id='use_image'>
-      <div>Use your image</div>
+      <div >Use your image</div>
       <input id="Input" type="file" accept="image/*">
     </div>
   </div>
-  <div>
+  <div id='info'>
 
-    <strong>Data protection</strong> is important. You could turn off your WIFI while processing your image. All process is done in your broswer.
+    <strong>Data protection</strong> is important. <span>You could turn off your WIFI while processing your image.</span> All process is done in your broswer.
 
   </div>
 </div>
@@ -320,7 +321,7 @@
 </div>
 
 <script src= 'image_editor.js'></script>
-
+<script src= 'media_query.js'></script>
 </body>
 
 
