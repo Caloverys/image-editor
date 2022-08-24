@@ -75,11 +75,15 @@ table {
   left: 55vw;
   opacity: var(--opacity);
   padding: 2%;
+
+}
+#upload_section > #info{
+    font-size: 2vh;
 }
 
 #use_image {
   position: relative;
-  margin-top: 5%;
+  margin-top: 3vh;
   margin-bottom: 3%;
   width: max-content;
   border-radius: 5px;
