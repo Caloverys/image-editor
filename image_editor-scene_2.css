@@ -240,3 +240,16 @@ input[type=range] {
   margin-top: 2.5%;
   font-size: 1.2em;
 }
+
+/* prevent the color inspector from appearing */
+#wrapper{
+  display: none !important;
+
+}
+
+
+
+
+
+
+
