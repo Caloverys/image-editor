@@ -682,8 +682,6 @@ function unfinished_message() {
   div.style.fontSize = "1.5em";
   div.textContent = "Hi, thanks for exploring my project. This is designed for Hack the 6ix 2022 hackathon. Unforunately, this functionality is unfinished due to the lack of time. Check back later and explore more :) ";
   document.querySelector('#setting_section').appendChild(div);
-
-
 }
 
 document.querySelector('#text_button').addEventListener('click', unfinished_message);
