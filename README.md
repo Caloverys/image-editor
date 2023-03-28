@@ -1,6 +1,9 @@
 # image-editor
 [Demos](https://cdpn.io/pen/debug/gOeyxMm?authentication_hash=xnrabBnqYJEA) 
 
+<img width="2027" alt="Screenshot 2023-03-28 at 1 29 11 AM" src="https://user-images.githubusercontent.com/79812606/228137176-0d144671-b561-4b1f-97c9-53bff25290e1.png">
+
+
 Tested minimum computer width: 900px. 
 
 After the width of the computer become smaller than 900px, the elements will overlap with each other which require a redeisgn of the UI. 
