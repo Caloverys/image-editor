@@ -243,23 +243,30 @@ function isInCanvas(posX, posY) {
 }
 
 document.addEventListener('mousemove', zoom_tool);
-canvas.addEventListener('click', get_color);
-
+canvas.addEventListener('click', display_color);
+/*
 function get_color() {
-  let color = window.getComputedStyle(document.querySelector('td[data-x="5"][data-y="5"]'))['background-color'];
-  document.querySelector('#big_box .box').style.backgroundColor = color;
+  let color = ;
+  display_color(color)
 
+}*/
+
+function display_color(input ){
+      console.log(input)
+    let color = input || window.getComputedStyle(document.querySelector('td[data-x="5"][data-y="5"]'))['background-color'];
+
+  document.querySelector('#big_box .box').style.backgroundColor = color;
   if (document.querySelector('input[type=checkbox]').checked) {
-    color = color.toRGBA("#big_box .box");
-    document.querySelector('#hex_value').textContent = color.toHex();
+    console.log(color)
+   color = color.toRGBA("#big_box .box");
+   document.querySelector('#hex_value').textContent = color.toHex();
 
   } else {
-    document.querySelector('#hex_value').textContent = color.toRGBA("#big_box .box").toHex().slice(0, -1);
-    color = color.toRGB();
+  document.querySelector('#hex_value').textContent = color.toRGBA("#big_box .box").toHex().slice(0, -1);
+   color = color.toRGB();
 
   }
   document.querySelector('#rgba_value').textContent = color;
-
 
 }
 
@@ -319,8 +326,15 @@ String.prototype.toRGBA = function(ele) {
 
 
 
-window.onload = function() {
-  document.elementFromPoint(400, 500).click();
+
+window.onload  = function() {
+  const canvas_dimension  = canvas.getBoundingClientRect();
+  let color = context.getImageData(canvas_dimension.left + Math.random() * canvas_dimension.width, canvas_dimension.top + Math.random() * canvas_dimension.height, 1,1).data;
+  console.log(`rgb(${color.join(", ")})`)
+  //convert from Uint8ClampedArray to rgb format
+  display_color(`rgb(${color.join(", ")})`)
+  console.log(color)
+  console.log(canvas_dimension.left + Math.random() * canvas_dimension.width, canvas_dimension.top + Math.random() * canvas_dimension.height)
 }
 
 
@@ -568,7 +582,7 @@ function active_stylesheet(remain_stylesheet_id) {
 
 }
 
-//edit_image.click();//
+
 
 document.querySelector('#take_photo_button').addEventListener('click', function() {
   const canvas = document.createElement('canvas');
@@ -682,6 +696,8 @@ function unfinished_message() {
   div.style.fontSize = "1.5em";
   div.textContent = "Hi, thanks for exploring my project. This is designed for Hack the 6ix 2022 hackathon. Unforunately, this functionality is unfinished due to the lack of time. Check back later and explore more :) ";
   document.querySelector('#setting_section').appendChild(div);
+
+
 }
 
 document.querySelector('#text_button').addEventListener('click', unfinished_message);
