@@ -1,7 +1,10 @@
 .scene_2 {
   display: revert !important;
 }
-
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
 nav {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 7.5px;
