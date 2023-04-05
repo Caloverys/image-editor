@@ -1,7 +1,10 @@
 .scene_3 {
   display: revert !important;
 }
-
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
 .vertical_center {
   display: none !important;
 }
