@@ -724,7 +724,7 @@ function unfinished_message() {
   const div = document.createElement('div');
   div.className = 'alert'
   div.style.fontSize = "1.5em";
-  div.textContent = "Hi, thanks for exploring my project. This is designed for Hack the 6ix 2022 hackathon. Unforunately, this functionality is unfinished due to the lack of time. Check back later and explore more :) ";
+  div.textContent = "This is unfished but will soon be finished. Last updated date: 2023 Apirl 4th";
   document.querySelector('#setting_section').appendChild(div);
 
 
