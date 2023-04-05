@@ -252,8 +252,8 @@ function get_color() {
 }*/
 
 function display_color(input ){
-      console.log(input)
-    let color = input || window.getComputedStyle(document.querySelector('td[data-x="5"][data-y="5"]'))['background-color'];
+    
+    let color = input instanceof String ? input : window.getComputedStyle(document.querySelector('td[data-x="5"][data-y="5"]'))['background-color'];
 
   document.querySelector('#big_box .box').style.backgroundColor = color;
   if (document.querySelector('input[type=checkbox]').checked) {
@@ -350,7 +350,17 @@ for (let i = 0; i < 8; i++) {
   cropper.className = `cropper_point cropper_point_${i+1}`;
   document.body.appendChild(cropper);
   cropper_list.push(cropper);
+  cropper.addEventListener('mousedown',mouseDownEvent)
+
 };
+
+function mouseUpEvent(){
+  document.removeEventListener('mousedown',mouseDownEvent)
+  document.removeEventListener("mouseup", mouseUpEvent);
+  document.removeEventListener('mousemove',mouseMoveEvent)
+
+}
+
 const cropper_side = [];
 for (let i = 0; i < 4; i++) {
   const side = document.createElement('div');
@@ -359,9 +369,29 @@ for (let i = 0; i < 4; i++) {
   cropper_side.push(side);
 }
 
+function mouseDownEvent(){
+  document.addEventListener("mouseup", mouseUpEvent);
+  document.addEventListener("mousemove",mouseMoveEvent);
+
+}
+function mouseMoveEvent(e){
+let [pos_X, pos_Y] = [e.clientX,e.clientY];
+let {top:canvas_top, left:canvas_left} = canvas.getBoundingClientRect();
+console.log(pos_X, pos_Y,canvas_top, canvas_left);
+context.clearRect(0,0,canvas.width,canvas.height)
+  const image = new Image();
+  image.onload = function() {
+   let x_difference = pos_X-canvas_left;
+   let y_difference = pos_Y - canvas_top
+    context.drawImage(image, x_difference, y_difference, calculateAspectRatioFit(image.width - x_difference, image.height - y_difference).width, calculateAspectRatioFit(image.width - x_difference, image.height - y_difference).height);
+  }
+ // canvas.style.opacity = 1;
+  image.src = image_data;
+
+
+}
 
 function update_position() {
-
   let {
     top: canvas_top,
     left: canvas_left,
