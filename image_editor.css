@@ -1,6 +1,6 @@
 * {
   user-select: none;
-  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 html {
@@ -204,4 +204,3 @@ div[class*='scene_'] {
 img{
     display: none;
 }
-
